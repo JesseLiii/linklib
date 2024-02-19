@@ -10,12 +10,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+
+enum ContentType {
+  INSTAGRAM
+  LINKEDIN
+  TWITTER
+  TIKTOK
+  YOUTUBE
+}
+
+
 model ContentItem {
   id        String    @id @default(cuid())
   createdAt DateTime  @default(now())
-  title     String
-  link      String
+  link      String?
+  type      ContentType
+  nativeId  String?
 
   @@index ([createdAt])
   @@map("content_items")
 }
+
+
+
